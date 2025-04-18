@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dual Hit Cat w/ Buttons</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    #wrapper {
+      position: relative;
+      width: 300px;
+    }
+
+    #cat {
+      width: 100%;
+      z-index: 2;
+      position: relative;
+    }
+
+    .hit-object {
+      width: 100px;
+      position: absolute;
+      bottom: -10px;
+      z-index: 1;
+    }
+
+    #left-object {
+      left: 0;
+    }
+
+    #right-object {
+      right: 0;
+    }
+
+    .controls {
+      margin-top: 30px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .hit-button {
+      padding: 10px 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .hit-button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <img id="cat" src="cat-normal.png" alt="Cat" />
+    <img id="left-object" class="hit-object" src="left-object.png" alt="Left Object" />
+    <img id="right-object" class="hit-object" src="right-object.png" alt="Right Object" />
+  </div>
+
+  <div class="controls">
+    <button id="leftBtn" class="hit-button">Left</button>
+    <button id="rightBtn" class="hit-button">Right</button>
+  </div>
+
+  <audio id="left-sound" src="left-sound.mp3" preload="auto"></audio>
+  <audio id="right-sound" src="right-sound.mp3" preload="auto"></audio>
+
+  <script>
+    const cat = document.getElementById("cat");
+    const leftSound = document.getElementById("left-sound");
+    const rightSound = document.getElementById("right-sound");
+    const leftBtn = document.getElementById("leftBtn");
+    const rightBtn = document.getElementById("rightBtn");
+
+    function playLeft() {
+      cat.src = "cat-left-hit.png";
+      leftSound.currentTime = 0;
+      leftSound.play();
+      setTimeout(() => {
+        cat.src = "cat-normal.png";
+      }, 150);
+    }
+
+    function playRight() {
+      cat.src = "cat-right-hit.png";
+      rightSound.currentTime = 0;
+      rightSound.play();
+      setTimeout(() => {
+        cat.src = "cat-normal.png";
+      }, 150);
+    }
+
+    leftBtn.addEventListener("click", playLeft);
+    rightBtn.addEventListener("click", playRight);
+
+    // Optional: keep keyboard input too
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "a" || e.key === "A") playLeft();
+      if (e.key === "l" || e.key === "L") playRight();
+    });
+  </script>
+</body>
+</html>
