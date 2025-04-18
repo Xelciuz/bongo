@@ -81,13 +81,13 @@
 
   <script>
     const cat = document.getElementById("cat");
-    const leftSound = document.getElementById("anime-moan");
-    const rightSound = document.getElementById("pakad-mc");
+    const leftSound = document.getElementById("left-sound");
+    const rightSound = document.getElementById("right-sound");
     const leftBtn = document.getElementById("leftBtn");
     const rightBtn = document.getElementById("rightBtn");
 
     function playLeft() {
-      cat.src = "cat-left-hit.png";
+      cat.src = "cat-left.png";
       leftSound.currentTime = 0;
       leftSound.play();
       setTimeout(() => {
@@ -96,7 +96,7 @@
     }
 
     function playRight() {
-      cat.src = "cat-right-hit.png";
+      cat.src = "cat-right.png";
       rightSound.currentTime = 0;
       rightSound.play();
       setTimeout(() => {
